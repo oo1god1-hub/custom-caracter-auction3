@@ -271,5 +271,17 @@ app.post("/api/rooms/:code/characters/:characterId/image", (req, res) => {
   });
 });
 
-app.get("/api/health", (_req,res) => res.json({ok:true,rooms:rooms.size}));
-server.listen(PORT, "0.0.0.0", () => console.log(`Auction game running on port ${PORT}`));
+// Homepage route
+app.get("/", (req, res) => {
+    res.sendFile(path.join(publicDir, "index.html"));
+});
+
+// Health check
+app.get("/api/health", (req, res) => {
+    res.json({ ok: true, rooms: rooms.size });
+});
+
+// Start server
+server.listen(PORT, "0.0.0.0", () => {
+    console.log(`Auction game running on port ${PORT}`);
+});
